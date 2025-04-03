@@ -3,9 +3,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.sessions import SessionMiddleware
 from app.core.config import settings
 from app.api.v1.api import api_router
-from app.db.base_class import Base
 from app.db.session import engine
+from app.models.associations import playlist_track_association
+from app.models.oauth_token import OAuthToken
+from app.models.playlist import Playlist
+from app.models.track import Track
 from app.models.user import User
+from app.db.base import Base 
 
 # Créer les tables
 Base.metadata.create_all(bind=engine)

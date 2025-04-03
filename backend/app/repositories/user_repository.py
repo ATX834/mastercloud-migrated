@@ -17,21 +17,18 @@ class UserRepository:
     def get_by_email(self, email: str) -> User | None:
         return self.db.query(User).filter(User.email == email).first()
 
-    def get_by_google_id(self, google_id: str) -> User | None:
+    async def get_by_google_id(self, google_id: str) -> User | None:
         return self.db.query(User).filter(User.google_id == google_id).first()
 
-    def create(self, user_in: UserCreate | dict[str, any], google_id: Optional[str] = None) -> User:
+    async def create(self, user_in: UserCreate | dict[str, any], google_id: Optional[str] = None) -> User:
         hashed_password = None
         if isinstance(user_in, UserCreate) and user_in.password:
             hashed_password = get_password_hash(user_in.password)
-            username=user_in.username
             email=user_in.email
         elif isinstance(user_in, dict):
-            username=user_in.get('name')
             email=user_in.get('email')
         else:
             if isinstance(user_in, UserCreate):
-                username=user_in.username
                 email=user_in.email
             else:
                 raise ValueError("Invalid input for user creation")
@@ -47,11 +44,9 @@ class UserRepository:
             return existing_user
 
         db_user = User(
-            username=username,
             email=email,
             hashed_password=hashed_password,
             google_id=google_id,
-            is_active=True
         )
         self.db.add(db_user)
         self.db.commit()

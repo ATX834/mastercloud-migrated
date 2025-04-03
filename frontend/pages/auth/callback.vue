@@ -6,7 +6,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useState, definePageMeta } from '#imports';
@@ -30,7 +30,7 @@ onMounted(() => {
 
   if (token) {
     message.value = 'Authentification réussie ! Redirection...';
-    authToken.value = token;
+    authToken.value = token as string;
     // Rediriger vers la page principale ou le tableau de bord après un court délai
     setTimeout(() => {
       router.push('/my-playlist'); // Ou la page de destination souhaitée
