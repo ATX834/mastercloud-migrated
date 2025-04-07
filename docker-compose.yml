@@ -1,13 +1,11 @@
-version: '3.8'
-
 services:
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: fastapi_backend
+    container_name: mastercloud_remaster
     env_file:
-      - ./backend/.env  # You will need to create this file from .env.example
+      - ./backend/.env
     ports:
       - "8000:8000"
     volumes:
@@ -29,13 +27,13 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     env_file:
-      - ./backend/.env # Use same .env for DB credentials
+      - ./backend/.env
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=app
     ports:
-      - "5432:5432" # Expose on host port 5433 to avoid conflicts
+      - "5432:5432"
     networks:
       - app-network
 

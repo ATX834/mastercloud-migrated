@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen relative">
       <div class="fixed inset-0 z-0">
-      <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+      <div class="absolute inset-0 bg-black"></div>
     </div>
 
     <!-- Navbar fixe -->
@@ -11,12 +11,12 @@
           <!-- Logo -->
           <NuxtLink to="/" class="flex items-center space-x-3">
             <div class="w-10 h-10 bg-gradient-to-r from-blue-400 to-purple-500 rounded-lg"></div>
-            <span class="text-white text-2xl font-bold">MasterCloud</span>
+            <span class="text-white text-2xl font-bold">MasterCloud Remaster</span>
           </NuxtLink>
 
           <!-- Menu utilisateur -->
           <div class="flex items-center space-x-4">
-            <UserMenu v-if="isAuthenticated" />
+            <UserMenu v-if="isLoggedIn" />
             <template v-else>
               <NuxtLink to="/login" class="text-gray-300 hover:text-white transition-colors font-medium">
                 Connexion
@@ -49,12 +49,17 @@
 </template>
 
 <script setup>
-import UserMenu from '../components/Auth/UserMenu.vue'
-const isAuthenticated = ref(false) // À remplacer par la vraie logique d'authentification
+import { useUserStore } from '@/store/user'
+import UserMenu from '~/components/UserMenu.vue'
+import { storeToRefs } from 'pinia'
+
+const store = useUserStore()
+const { isLoggedIn } = storeToRefs(store)
+
+
 </script>
 
 <style>
-/* Ajout d'un effet de scroll personnalisé */
 ::-webkit-scrollbar {
   width: 8px;
 }

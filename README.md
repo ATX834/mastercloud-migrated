@@ -1,9 +1,11 @@
-# MasterCloud Frontend
+# MasterCloud Remaster
 
-Application frontend de MasterCloud, une plateforme de streaming musicale.
+Application MasterCloud Remaster, une plateforme de streaming musicale.
 
 ## Technologies utilisées
 
+- Python
+- FastAPI
 - Nuxt 3
 - Vue 3
 - TypeScript

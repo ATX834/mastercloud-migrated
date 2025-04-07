@@ -1,14 +1,14 @@
 fastapi
 uvicorn[standard]
 sqlalchemy
+pydantic
+pydantic_settings
 psycopg2-binary
-pydantic[email]
-pydantic-settings
 python-jose[cryptography]
-passlib[bcrypt]
-python-dotenv
-httpx
+passlib
+argon2-cffi
 authlib
-alembic # Pour les migrations de base de données
-python-multipart
-itsdangerous # Ajout pour SessionMiddleware 
+httpx
+starlette
+itsdangerous
+cryptography
